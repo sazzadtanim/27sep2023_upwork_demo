@@ -1,6 +1,7 @@
 'use client'
 import svgImage from '@svg/blurry-gradient-haikei.svg'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface Box {
   top: number
@@ -21,14 +22,27 @@ export default function Home() {
   const mappedPositionReady = true
   return (
     <main className='flex min-h-screen flex-col items-center justify-center'>
-      <h2 className='font-bold text-2xl'>Please check the source code</h2>
+      <h2 className='text-2xl font-bold'>
+        Please inspect or check the{' '}
+        <Link
+          href={'https://github.com/sazzadtanim/27sep2023_upwork_demo'}
+          className='underline'
+        >
+          source
+        </Link>{' '}
+        code
+      </h2>
+
       <div className=''>
         <div className='relative'>
           <Image alt='background' src={svgImage} />
           {mappedPosition.map((position, i) => (
             <div
               key={i}
-              className={`absolute bg-lime-300`}
+              className={`absolute bg-lime-300 ${
+                mappedPositionReady ? '' : 'hidden'
+              }`}
+              // using style is best for this situation
               style={{ top: `${position.top}%`, left: `${position.left}%` }}
             >
               {i}
